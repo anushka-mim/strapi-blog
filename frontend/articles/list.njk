@@ -1,0 +1,30 @@
+---
+layout: layouts/home.njk
+templateClass: tmpl-post
+eleventyNavigation:
+  key: Writing
+  order: 4
+pagination:
+  data: articles
+  size: 12
+permalink: blog{% if pagination.pagenumber > 0 %}/page{{ pagination.pageNumber + 1 }}{% endif %}/index.html
+---
+
+{% include "postslist.njk" %}
+{% set htmlTitle = item.title %}
+
+{% block content %}
+<h2> unfiltered, raw </h2>
+
+{% for item in pagination.items %}
+{% if loop.first %}<ul>{% endif %}
+
+  <li> 
+    <h2><a href="/blog/{{item.slug}}"> {{ item.title }} </a></h2>
+    <br>
+  </li>
+
+{% if loop.last %}</ul>{% endif %}
+{% endfor %}
+
+{% endblock %}
